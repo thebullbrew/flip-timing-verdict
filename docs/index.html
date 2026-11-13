@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Flip Timing Verdict — Sell Now or Hold for Long-Term Gains?</title>
+<meta name="description" content="Price the wait: tax saved by crossing 12 months vs carrying burned getting there. Break-even future price included.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-32.png"><link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="theme-color" content="#090909">
+<style>
+:root{--bg:#090909;--surface:#111111;--text:#F6F1E3;--accent:#D4AF37;--accent2:#7A5C1E;--muted:#B8B09A;--line:#2E2510;--good:#8FC98A;--bad:#E08A7A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 48px}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-size:11px;text-align:center;margin-top:14px}
+h1{font-size:clamp(34px,6vw,58px);line-height:.98;text-align:center;margin:10px 0 8px;color:var(--text)}
+h1 em{color:var(--accent);font-style:normal}
+.sub{text-align:center;color:var(--muted);max-width:720px;margin:0 auto 18px;font-size:16px;line-height:1.5}
+.rule{height:5px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:18px 0;border:none}
+.card{background:var(--surface);border:2px solid var(--accent2);padding:20px;margin:16px 0;position:relative}
+.card:before,.card:after{content:"✦";position:absolute;color:var(--accent);font-size:16px}
+.card:before{top:6px;left:10px}.card:after{bottom:6px;right:10px}
+h2{color:var(--accent);font-size:20px;margin:0 0 14px;letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;background:#000;border:1px solid var(--accent2);color:var(--text);padding:11px;font-size:17px;font-family:inherit}
+.hero{text-align:center;padding:28px 18px}
+.seal{display:inline-block;border:3px double var(--accent);color:var(--accent);padding:12px 22px;font-size:clamp(20px,4vw,32px);letter-spacing:.08em;text-transform:uppercase;background:#000}
+.big{font-size:clamp(42px,8vw,76px);color:var(--accent);font-weight:bold;line-height:1;margin:14px 0 4px}
+.big.neg{color:var(--bad)} .big.pos{color:var(--good)}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}.kv b{color:var(--text);text-align:right}
+.bar{height:16px;background:#000;border:1px solid var(--line);display:flex;overflow:hidden;margin:10px 0}.bar div{height:100%}
+button{background:linear-gradient(180deg,#E8C95A,var(--accent));color:#000;border:none;padding:13px 18px;font-family:inherit;font-weight:bold;letter-spacing:.06em;cursor:pointer;font-size:15px}
+button.ghost{background:#000;color:var(--accent);border:1px solid var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--accent);text-transform:uppercase;font-size:11px;letter-spacing:.1em}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.presets button{padding:9px 12px;font-size:13px}
+.small{color:var(--muted);font-size:13px;line-height:1.55}textarea{width:100%;min-height:110px;background:#000;color:var(--text);border:1px solid var(--accent2);padding:12px;font-family:inherit}
+.win{background:#1A2A14!important}.note{border-left:4px solid var(--accent);padding:10px 14px;background:#000;color:var(--muted);line-height:1.55;font-size:14px}
+</style></head><body><div class="wrap">
+<div class="eyebrow">✦ The Gilded Age Edition ✦ Daily Finance &amp; Real Estate Tools</div>
+<h1>The Flip Timing <em>Verdict</em></h1>
+<p class="sub">Everyone says “hold a year for long-term rates.” Nobody prices the wait. This does — the tax you actually save, minus every month of carrying you burn to earn it, and the future price below which holding was a mistake.</p>
+<hr class="rule">
+<div class="presets"><button data-p="classic">Classic Flip · 8 Months In</button><button data-p="high">High Earner</button><button data-p="thin">Thin Margin</button><button data-p="seasoned">Almost There · 11 Months</button></div>
+
+<div class="grid">
+<div class="card"><h2>❧ The Deal</h2>
+<label>Purchase price $</label><input id="purchase" type="number" value="285000">
+<label style="margin-top:10px">Rehab + improvements $</label><input id="rehab" type="number" value="65000">
+<label style="margin-top:10px">Buying closing costs $</label><input id="buyCosts" type="number" value="5000">
+<label style="margin-top:10px">Loan balance to pay off $</label><input id="loan" type="number" value="240000">
+<label style="margin-top:10px">Selling costs %</label><input id="sellPct" type="number" step="0.1" value="6">
+<label style="margin-top:10px">Sale price if you sell today $</label><input id="priceNow" type="number" value="425000">
+<label style="margin-top:10px">Expected price at long-term date $</label><input id="priceLater" type="number" value="430000">
+</div>
+<div class="card"><h2>☙ Time &amp; Tax</h2>
+<label>Months already held</label><input id="monthsHeld" type="number" step="0.5" value="8">
+<label style="margin-top:10px">Monthly carrying cost $ (interest, tax, insurance, utilities)</label><input id="carry" type="number" value="1850">
+<label style="margin-top:10px">Extra one-off holding costs $</label><input id="extraHold" type="number" value="1200">
+<label style="margin-top:10px">Short-term (ordinary) federal rate %</label><input id="stRate" type="number" step="0.1" value="24">
+<label style="margin-top:10px">Long-term capital-gains rate %</label><input id="ltRate" type="number" step="0.1" value="15">
+<label style="margin-top:10px">State tax on gain % (same both paths)</label><input id="stateRate" type="number" step="0.1" value="5">
+<label style="margin-top:10px">NIIT % (0 or 3.8)</label><input id="niit" type="number" step="0.1" value="0">
+</div>
+</div>
+
+<div class="card hero"><div class="seal" id="seal">—</div><div class="big" id="diffBig">$0</div><div id="diffLabel" class="small">net advantage of holding</div><p id="verdictText" style="max-width:720px;margin:14px auto 0;line-height:1.6"></p></div>
+
+<div class="grid">
+<div class="card"><h2>Sell Today</h2><div id="nowBox"></div></div>
+<div class="card"><h2>Hold to Long-Term</h2><div id="laterBox"></div></div>
+</div>
+
+<div class="card"><h2>Where the Money Goes — Holding Path</h2><div class="bar"><div id="bTax" style="background:var(--accent)"></div><div id="bCarry" style="background:#8A2E2E"></div><div id="bCash" style="background:#2E4A2E"></div></div><p class="small">Gold = tax at long-term rates · Oxblood = carrying burned while waiting · Green = cash in your pocket after loan, tax and carrying. A thin green bar with a fat oxblood bar is the tax tail wagging the deal.</p><div id="anatomy"></div></div>
+
+<div class="card"><h2>Future-Price Sensitivity</h2><p class="small">Same wait, different exit price. The break-even row is the line: below it, you paid carrying to end up poorer.</p><div style="overflow:auto"><table><thead><tr><th>Future price</th><th>Cash if you hold</th><th>vs Sell now</th><th>Call</th></tr></thead><tbody id="sens"></tbody></table></div></div>
+
+<div class="card"><h2>The Method</h2><div class="note">Basis = purchase + rehab/improvements + buying costs. Gain = net sale price (after selling costs) − basis. Short-term gain is taxed at your ordinary rate; a sale after more than 12 months at your long-term rate. State tax and NIIT are applied to both paths, so they do not fake a saving. Holding cash subtracts every month of carrying plus one-off hold costs. The break-even future price is solved exactly — it is the price where holding and selling today leave you with identical cash. Not tax advice; brackets, depreciation and dealer-vs-investor status change real bills — confirm with your CPA before you time a sale around a date.</div></div>
+
+<div class="card"><h2>Save &amp; Share</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="caseName" placeholder="Case name — e.g. Maple St flip" style="flex:1;min-width:200px"><button id="saveBtn">Save Case</button><button class="ghost" id="copyBtn">Copy Summary</button></div><div id="saved" style="margin-top:12px"></div><textarea id="summary" readonly style="margin-top:12px"></textarea></div>
+<p class="small" style="text-align:center">Built for flippers and accidental landlords staring at a calendar. The calendar is not a strategy — the math is.</p>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const ids=['purchase','rehab','buyCosts','loan','sellPct','priceNow','priceLater','monthsHeld','carry','extraHold','stRate','ltRate','stateRate','niit'];
+const num=id=>parseFloat($(id).value)||0;
+const fmt=n=>{const s=n<0?'-':'';return s+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');};
+function calc(v){
+  const basis=v.purchase+v.rehab+v.buyCosts;
+  const wait=Math.max(0,12-v.monthsHeld);
+  const netNow=v.priceNow*(1-v.sellPct/100), netLater=v.priceLater*(1-v.sellPct/100);
+  const gainNow=netNow-basis, gainLater=netLater-basis;
+  const stTot=v.stRate+v.stateRate+v.niit, ltTot=v.ltRate+v.stateRate+v.niit;
+  const taxNow=Math.max(gainNow,0)*stTot/100, taxLater=Math.max(gainLater,0)*ltTot/100;
+  const carryTotal=v.carry*wait+v.extraHold;
+  const cashNow=netNow-taxNow-v.loan;
+  const cashLater=netLater-taxLater-v.loan-carryTotal;
+  const taxOnLaterAtST=Math.max(gainLater,0)*stTot/100;
+  const taxSaved=taxOnLaterAtST-taxLater;
+  // break-even future price via binary search
+  let lo=0,hi=3000000;
+  const cashAt=p=>{const net=p*(1-v.sellPct/100);const g=net-basis;const t=Math.max(g,0)*ltTot/100;return net-t-v.loan-carryTotal;};
+  for(let i=0;i<60;i++){const mid=(lo+hi)/2; if(cashAt(mid)<cashNow) lo=mid; else hi=mid;}
+  const be=(lo+hi)/2;
+  return {basis,wait,netNow,netLater,gainNow,gainLater,taxNow,taxLater,carryTotal,cashNow,cashLater,taxSaved,be,diff:cashLater-cashNow,cashAt};
+}
+function vals(){const v={};ids.forEach(id=>v[id]=num(id));return v;}
+function render(){
+  const v=vals(), r=calc(v);
+  let seal, txt;
+  if(r.wait===0){seal='ALREADY LONG-TERM';txt='You have already crossed 12 months. There is no tax prize left for waiting — every extra month is pure carrying. Sell when the price is right, not when the calendar says so.';}
+  else if(r.taxSaved>0 && r.carryTotal>r.taxSaved && r.diff<-5000){seal='TAX TRAP';txt='The tax saving is real — '+fmt(r.taxSaved)+' — but the carrying to earn it costs '+fmt(r.carryTotal)+'. You would spend more than a dollar to save less than a dollar. Sell now and let the next deal make the money.';}
+  else if(r.diff>5000){seal='HOLD FOR THE RATE';txt='Holding '+r.wait+' month'+(r.wait===1?'':'s')+' nets you '+fmt(r.diff)+' after every carrying dollar. The future price can fall to '+fmt(r.be)+' before the wait stops paying — that is your cushion.';}
+  else if(r.diff<-5000){seal='SELL NOW';txt='Waiting costs you '+fmt(-r.diff)+' net. The rate difference cannot outrun this carrying bill at this margin. Take today\u2019s price.';}
+  else {seal='CLOSE CALL';txt='The two paths land within $5,000 of each other. Decide on risk, not tax: a price slip below '+fmt(r.be)+' while you wait erases the whole case for holding.';}
+  $('seal').textContent=seal;
+  $('diffBig').textContent=(r.diff>=0?'+':'')+fmt(r.diff).replace('$-','-$');
+  $('diffBig').className='big '+(r.diff>=0?'pos':'neg');
+  $('diffLabel').textContent=r.wait===0?'no wait left — carrying from here is pure cost':'net advantage of holding '+r.wait+' months to long-term treatment';
+  $('verdictText').textContent=txt;
+  const kv=(k,val)=>'<div class="kv"><span>'+k+'</span><b>'+val+'</b></div>';
+  $('nowBox').innerHTML=kv('Basis',fmt(r.basis))+kv('Net sale price',fmt(r.netNow))+kv('Gain',fmt(r.gainNow))+kv('Tax (short-term)',fmt(r.taxNow))+kv('Loan payoff',fmt(v.loan))+kv('Cash in pocket',fmt(r.cashNow));
+  $('laterBox').innerHTML=kv('Months to wait',r.wait)+kv('Net sale price',fmt(r.netLater))+kv('Gain',fmt(r.gainLater))+kv('Tax (long-term)',fmt(r.taxLater))+kv('Tax saved vs short-term on same gain',fmt(r.taxSaved))+kv('Carrying burned',fmt(r.carryTotal))+kv('Cash in pocket',fmt(r.cashLater))+kv('Break-even future price',fmt(r.be));
+  const tot=Math.max(1,r.taxLater+r.carryTotal+Math.max(r.cashLater,0));
+  $('bTax').style.width=(r.taxLater/tot*100)+'%';$('bCarry').style.width=(r.carryTotal/tot*100)+'%';$('bCash').style.width=(Math.max(r.cashLater,0)/tot*100)+'%';
+  $('anatomy').innerHTML=kv('Price-drop tolerance',fmt(v.priceLater-r.be))+kv('Carrying per month',fmt(v.carry))+kv('Tax saved per month waited',r.wait>0?fmt(r.taxSaved/r.wait):'—');
+  let rows='';
+  [-0.10,-0.05,0,0.05,0.10].forEach(d=>{const p=v.priceLater*(1+d);const c=r.cashAt(p);const df=c-r.cashNow;const isBE=Math.abs(p-r.be)<v.priceLater*0.01;rows+='<tr class="'+(df>=0?'win':'')+'"><td>'+fmt(p)+(d===0?' (expected)':'')+'</td><td>'+fmt(c)+'</td><td>'+(df>=0?'+':'')+fmt(df).replace('$-','-$')+'</td><td>'+(df>5000?'HOLD':df<-5000?'SELL':'CLOSE')+'</td></tr>';});
+  rows+='<tr><td>'+fmt(r.be)+' (break-even)</td><td>'+fmt(r.cashNow)+'</td><td>$0</td><td>LINE</td></tr>';
+  $('sens').innerHTML=rows;
+  $('summary').value='THE FLIP TIMING VERDICT — '+seal+'\nBasis '+fmt(r.basis)+' · Sell today at '+fmt(v.priceNow)+' nets '+fmt(r.cashNow)+' after '+fmt(r.taxNow)+' short-term tax.\nHold '+r.wait+' mo to '+fmt(v.priceLater)+': tax '+fmt(r.taxLater)+' (saves '+fmt(r.taxSaved)+'), carrying '+fmt(r.carryTotal)+', cash '+fmt(r.cashLater)+'.\nNet advantage of holding: '+fmt(r.diff)+'. Break-even future price: '+fmt(r.be)+'.';
+  renderSaved();
+}
+const presets={
+ classic:{purchase:285000,rehab:65000,buyCosts:5000,loan:240000,sellPct:6,priceNow:425000,priceLater:430000,monthsHeld:8,carry:1850,extraHold:1200,stRate:24,ltRate:15,stateRate:5,niit:0},
+ high:{purchase:285000,rehab:65000,buyCosts:5000,loan:240000,sellPct:6,priceNow:425000,priceLater:430000,monthsHeld:8,carry:1850,extraHold:1200,stRate:35,ltRate:20,stateRate:6,niit:3.8},
+ thin:{purchase:310000,rehab:70000,buyCosts:5500,loan:270000,sellPct:6,priceNow:415000,priceLater:418000,monthsHeld:7,carry:2100,extraHold:1500,stRate:22,ltRate:15,stateRate:5,niit:0},
+ seasoned:{purchase:260000,rehab:55000,buyCosts:4500,loan:210000,sellPct:6,priceNow:405000,priceLater:407000,monthsHeld:11,carry:1700,extraHold:600,stRate:24,ltRate:15,stateRate:5,niit:0}
+};
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{const p=presets[b.dataset.p];Object.keys(p).forEach(k=>{if($(k))$(k).value=p[k];});render();});
+ids.forEach(id=>$(id).addEventListener('input',render));
+function getSaved(){try{return JSON.parse(localStorage.getItem('ftv')||'[]');}catch(e){return[];}}
+function renderSaved(){const s=getSaved();$('saved').innerHTML=s.length?s.map((c,i)=>'<div class="kv"><span>'+c.name+' — '+c.seal+'</span><b>'+c.diff+' <button class="ghost" data-load="'+i+'">Load</button> <button class="ghost" data-del="'+i+'">✕</button></b></div>').join(''):'<p class="small">No saved cases yet.</p>';
+ document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{const c=getSaved()[+b.dataset.load];ids.forEach(id=>{if(c.v[id]!==undefined)$(id).value=c.v[id];});render();});
+ document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const s=getSaved();s.splice(+b.dataset.del,1);localStorage.setItem('ftv',JSON.stringify(s));renderSaved();});}
+$('saveBtn').onclick=()=>{const v=vals(),r=calc(v);const s=getSaved();s.push({name:$('caseName').value||'Untitled flip',seal:$('seal').textContent,diff:fmt(r.diff),v});localStorage.setItem('ftv',JSON.stringify(s));renderSaved();};
+$('copyBtn').onclick=()=>{$('summary').select();document.execCommand('copy');};
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+render();
+</script></body></html>
